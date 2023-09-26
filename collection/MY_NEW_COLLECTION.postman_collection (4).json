@@ -10,33 +10,6 @@
 			"name": "TEST CASE PRUEBA",
 			"item": [
 				{
-					"name": "PRUEBA",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{dom}}/{{cards}}?key={{NewKey}}&token={{NewToken}}",
-							"host": [
-								"{{dom}}"
-							],
-							"path": [
-								"{{cards}}"
-							],
-							"query": [
-								{
-									"key": "key",
-									"value": "{{NewKey}}"
-								},
-								{
-									"key": "token",
-									"value": "{{NewToken}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "TC GET CARD CEL",
 					"event": [
 						{
@@ -99,6 +72,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1502,6 +1480,16 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1615);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 900ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(900);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1599,6 +1587,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1200);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1787,6 +1780,11 @@
 									"\r",
 									"pm.test(\"Validate response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 700ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(700);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1885,6 +1883,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 700ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(700);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1983,6 +1986,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2034,8 +2042,33 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"resultado esperado\",()=>{\r",
+									"pm.test(\"resultado esperado\", function () {\r",
 									"pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"  \r",
+									"pm.test(\"Validate that CardMemberId\", () => {\r",
+									"    //parse the response JSON and test properties\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.id).to.eql(\"62d5c433f15678138d40a1e3\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate that object contains keys or properties\", () => {\r",
+									"    //parse the response JSON and test properties\r",
+									"    const responseJson = pm.response.json();\r",
+									"pm.expect({a: 1, b: 2}).to.have.all.keys('a', 'b');\r",
+									"pm.expect({a: 1, b: 2}).to.have.any.keys('a', 'b');\r",
+									"pm.expect({a: 1, b: 2}).to.not.have.any.keys('c', 'd');\r",
+									"pm.expect({a: 1}).to.have.property('a');\r",
+									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
+									"  .that.has.all.keys('a', 'b');\r",
+									"  });\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", () => {\r",
+									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that object contains EnvironmentVariable\", () => {\r",
@@ -2054,8 +2087,18 @@
 									"pm.environment.get(\"95172fed9fc9a034bf5d4635fb730bb1\");\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Validate that object contains EnvironmentVariable\", () => {\r",
+									"    //parse the response JSON and test properties\r",
+									"postman.setEnvironmentVariable(\"key\", \"value\");\r",
+									"});\r",
+									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2163,6 +2206,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2434,6 +2482,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2557,6 +2610,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2655,6 +2713,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2753,6 +2816,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2851,6 +2919,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3014,7 +3087,6 @@
 									"postman.setEnvironmentVariable(\"key\", \"value\");\r",
 									"});\r",
 									"\r",
-									"\r",
 									"pm.test(\"Validate variable key with methodology get\", function () {\r",
 									"  //access a variable at any scope including local\r",
 									"pm.variables.get(\"95172fed9fc9a034bf5d4635fb730bb1\");\r",
@@ -3028,6 +3100,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable card\", function () {\r",
 									"  pm.expect(pm.response.json().cards).to.eql(pm.environment.get(\"cards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3350,6 +3427,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3411,7 +3493,7 @@
 									"pm.test(\"Validate that Board MemberID\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(\"62d5c433f15678138d40a1e3\");\r",
+									"    pm.expect(responseJson.id).to.eql(\"63489c9a73cb2c007604b11d\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -3447,6 +3529,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3822,6 +3909,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3925,6 +4017,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4028,6 +4125,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4126,6 +4228,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4224,6 +4331,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4322,6 +4434,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4425,6 +4542,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4523,6 +4645,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4574,6 +4701,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"resultado esperado\",()=>{\r",
+									"pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate that BoardCardsfilterId\", () => {\r",
+									"    //parse the response JSON and test properties\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.id).to.eql(\"645bf30b01598b8ebaf741c8\");\r",
+									"});\r",
+									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
@@ -4588,7 +4729,6 @@
 									"   pm.test(\"Content-Type header is present\", () => {\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
-									"\r",
 									"\r",
 									"pm.test(\"Validate that object contains EnvironmentVariable\", () => {\r",
 									"    //parse the response JSON and test properties\r",
@@ -4608,6 +4748,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4707,6 +4852,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4805,6 +4955,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -5051,6 +5206,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -5149,6 +5309,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -5248,6 +5413,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -5571,6 +5741,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -5668,6 +5843,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -5766,6 +5946,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -5864,6 +6049,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -5962,6 +6152,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -6060,6 +6255,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -6158,6 +6358,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -6322,6 +6527,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -6425,6 +6635,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -6670,6 +6885,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable emoji\", function () {\r",
 									"  pm.expect(pm.response.json().emoji).to.eql(pm.environment.get(\"emoji\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1200);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -6919,7 +7139,7 @@
 			]
 		},
 		{
-			"name": "TEST CASE CHECKLIST",
+			"name": "TEST CASE CHECKITEM",
 			"item": [
 				{
 					"name": "TC GET CHECKLIST N",
@@ -6975,6 +7195,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -7036,7 +7261,7 @@
 									"pm.test(\"Validate that ChecklistCardID\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eq (\"645bf30b01598b8ebaf741c8\");\r",
+									"    pm.expect(responseJson.id).to.equal(\"645bf30b01598b8ebaf741c8\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -7072,6 +7297,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -7170,6 +7400,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -7437,11 +7672,11 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"pm.response.to.have.status(200);\r",
+									"pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Status code is 200\", () => {\r",
-									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"pm.test(\"Status code is 404\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(404);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that Checklist CheckitemId\", () => {\r",
@@ -7483,6 +7718,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -7550,7 +7790,7 @@
 									"pm.test(\"Validate that ChecklistPos\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.pos).to.eql(\"49152\");\r",
+									"    pm.expect(responseJson.value).to.eql(\"49152\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -7586,6 +7826,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -7715,11 +7960,11 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\",()=>{\r",
-									"pm.response.to.have.status(200);\r",
+									"pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Status code is 200\", () => {\r",
-									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"pm.test(\"Status code is 404\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(404);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -7755,6 +8000,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable CustomFields\", function () {\r",
 									"  pm.expect(pm.response.json().customFields).to.eql(pm.environment.get(\"customFields\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -7806,11 +8056,11 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\",()=>{\r",
-									"pm.response.to.have.status(200);\r",
+									"pm.response.to.have.status(400);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Status code is 200\", () => {\r",
-									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"pm.test(\"Status code is 400\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -7846,6 +8096,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable CustomFields\", function () {\r",
 									"  pm.expect(pm.response.json().customFields).to.eql(pm.environment.get(\"customFields\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -8121,6 +8376,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"resultado esperado\",()=>{\r",
+									"pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 400\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
 									"    //parse the response JSON and test properties\r",
@@ -8155,6 +8417,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable batch\", function () {\r",
 									"  pm.expect(pm.response.json().batch).to.eql(pm.environment.get(\"batch\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -8208,7 +8475,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"pm.response.to.have.status(200);\r",
+									"pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Status code is 404\", () => {\r",
@@ -8248,6 +8515,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable applications\", function () {\r",
 									"  pm.expect(pm.response.json().applications).to.eql(pm.environment.get(\"applications\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -8299,11 +8571,11 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\",()=>{\r",
-									"pm.response.to.have.status(200);\r",
+									"pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Status code is 200\", () => {\r",
-									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"pm.test(\"Status code is 404\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(404);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -8339,6 +8611,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Enterprize\", function () {\r",
 									"  pm.expect(pm.response.json().enterprize).to.eql(pm.environment.get(\"enterprize\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -8584,6 +8861,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"Checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -8681,6 +8963,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"Checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -8779,6 +9066,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"Checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -8877,6 +9169,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"Checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -8975,6 +9272,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"Checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -9073,6 +9375,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Checklist\", function () {\r",
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"Checklist\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -9463,6 +9770,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable labels\", function () {\r",
 									"  pm.expect(pm.response.json().label).to.eql(pm.environment.get(\"labels\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -9784,6 +10096,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable List\", function () {\r",
 									"  pm.expect(pm.response.json().list).to.eql(pm.environment.get(\"Lists\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -9914,9 +10231,9 @@
 									"  pm.expect(pm.response.code).to.eql(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validate that List CardId\", () => {\r",
+									"pm.test(\"Validate that ListCardId\", () => {\r",
 									"    //parse the response JSON and test properties\r",
-									"    const responseJson = pm.response.json();\r",
+									"const responseJson = pm.response.json();\r",
 									"    pm.expect(responseJson.id).to.eql(\"645bf30b01598b8ebaf741c8\");\r",
 									"});\r",
 									"\r",
@@ -9953,6 +10270,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable List\", function () {\r",
 									"  pm.expect(pm.response.json().list).to.eql(pm.environment.get(\"Lists\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -10014,8 +10336,8 @@
 									"\r",
 									"pm.test(\"Validate that List ActionId\", () => {\r",
 									"    //parse the response JSON and test properties\r",
-									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(\"64c18872753ccee181ae7d2f\");\r",
+									"const responseJson = pm.response.json();\r",
+									"pm.expect(responseJson.id).to.eql(\"64c18872753ccee181ae7d2f\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -10051,6 +10373,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable List\", function () {\r",
 									"  pm.expect(pm.response.json().list).to.eql(pm.environment.get(\"Lists\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -10149,6 +10476,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable List\", function () {\r",
 									"  pm.expect(pm.response.json().list).to.eql(pm.environment.get(\"Lists\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -10318,6 +10650,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable List\", function () {\r",
 									"  pm.expect(pm.response.json().list).to.eql(pm.environment.get(\"Lists\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -10781,6 +11118,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -10878,6 +11220,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -11052,6 +11399,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -11232,6 +11584,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -11330,6 +11687,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -11428,6 +11790,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -11487,10 +11854,10 @@
 									"  pm.expect(pm.response.code).to.eql(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validate that CardID\", () => {\r",
+									"pm.test(\"Validate that MembersUsername\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(\"645bf30b01598b8ebaf741c8\");\r",
+									"    pm.expect(responseJson.username).to.eql(\"rebecavargas28\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -11526,6 +11893,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -11585,10 +11957,10 @@
 									"  pm.expect(pm.response.code).to.eql(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validate that CardID\", () => {\r",
+									"pm.test(\"Validate that MembersActionsId\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(\"645bf30b01598b8ebaf741c8\");\r",
+									"    pm.expect(responseJson.id).to.eql(\"64c9b995ec8e86b503870e85\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -11622,8 +11994,13 @@
 									"pm.environment.get(\"95172fed9fc9a034bf5d4635fb730bb1\");\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response property matches environment variable Members\", function () {\r",
+									"pm.test(\"Response property matches environment variable MembersActions\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -11686,7 +12063,7 @@
 									"pm.test(\"Validate that CardID\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(\"645bf30b01598b8ebaf741c8\");\r",
+									"    pm.expect(responseJson.id).to.eql(\"blue\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -11720,8 +12097,13 @@
 									"pm.environment.get(\"95172fed9fc9a034bf5d4635fb730bb1\");\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response property matches environment variable Members\", function () {\r",
+									"pm.test(\"Response property matches environment variable MemberBoardbackGrounds\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -11781,10 +12163,10 @@
 									"  pm.expect(pm.response.code).to.eql(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validate that CardID\", () => {\r",
+									"pm.test(\"Validate that Mmbers BackgroundID\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(63daec55ca241eb9df9511db);\r",
+									"    pm.expect(responseJson.id).to.eql(\"63daec55ca241eb9df9511db\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -11820,6 +12202,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -12072,6 +12459,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -12170,6 +12562,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -12422,6 +12819,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -12520,6 +12922,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -12618,6 +13025,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -12716,6 +13128,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -12814,6 +13231,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -12912,6 +13334,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -13010,6 +13437,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -13186,6 +13618,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -13238,11 +13675,11 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\",()=>{\r",
-									"pm.response.to.have.status(200);\r",
+									"pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Status code is 200\", () => {\r",
-									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"pm.test(\"Status code is 404\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(404);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that notificationmemberId\", () => {\r",
@@ -13284,6 +13721,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -13687,6 +14129,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Members\", function () {\r",
 									"  pm.expect(pm.response.json().member).to.eql(pm.environment.get(\"members\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -13866,6 +14313,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Notifications\", function () {\r",
 									"  pm.expect(pm.response.json().notifications).to.eql(pm.environment.get(\"notifications\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(884);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -13917,11 +14369,11 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\",()=>{\r",
-									"pm.response.to.have.status(200);\r",
+									"pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Status code is 200\", () => {\r",
-									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"  pm.expect(pm.response.code).to.eql(404);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that NotificationsId\", () => {\r",
@@ -13963,6 +14415,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Notifications\", function () {\r",
 									"  pm.expect(pm.response.json().notifications).to.eql(pm.environment.get(\"notifications\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1534);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -14156,12 +14613,6 @@
 									"  pm.expect(pm.response.code).to.eql(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validate that NotificationsField\", () => {\r",
-									"    //parse the response JSON and test properties\r",
-									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.value.to.eql(\"false\");\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Validate that an object contains keys or properties\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
@@ -14195,6 +14646,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Notifications\", function () {\r",
 									"  pm.expect(pm.response.json().notifications).to.eql(pm.environment.get(\"notifications\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(884);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -14355,6 +14811,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Notifications\", function () {\r",
 									"  pm.expect(pm.response.json().notifications).to.eql(pm.environment.get(\"notifications\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(884);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -14457,6 +14918,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Notifications\", function () {\r",
 									"  pm.expect(pm.response.json().notifications).to.eql(pm.environment.get(\"notifications\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(944);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -14559,6 +15025,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Notifications\", function () {\r",
 									"  pm.expect(pm.response.json().notifications).to.eql(pm.environment.get(\"notifications\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(884);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -14611,11 +15082,11 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\",()=>{\r",
-									"pm.response.to.have.status(200);\r",
+									"pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Status code is 200\", () => {\r",
-									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"  pm.expect(pm.response.code).to.eql(404);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that NotificationsMembercreatorId\", () => {\r",
@@ -14657,6 +15128,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Notifications\", function () {\r",
 									"  pm.expect(pm.response.json().notifications).to.eql(pm.environment.get(\"notifications\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -14830,6 +15306,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -15003,6 +15484,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(923);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -15106,6 +15592,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(830);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -15209,6 +15700,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(796);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -15316,6 +15812,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(881);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -15654,6 +16155,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(922);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -15762,6 +16268,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -15875,6 +16386,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -15988,6 +16504,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -16101,6 +16622,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -16209,6 +16735,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(816);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -16394,6 +16925,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable organizations\", function () {\r",
 									"  pm.expect(pm.response.json().organizations).to.eql(pm.environment.get(\"organizations\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -16512,6 +17048,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Plugins\", function () {\r",
 									"  pm.expect(pm.response.json().plugin).to.eql(pm.environment.get(\"plugins\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(734);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -16636,11 +17177,11 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"pm.response.to.have.status(200);\r",
+									"pm.response.to.have.status(400);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Status code is 200\", () => {\r",
-									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that PluginId\", () => {\r",
@@ -16682,6 +17223,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Plugins\", function () {\r",
 									"  pm.expect(pm.response.json().plugin).to.eql(pm.environment.get(\"plugins\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1289);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -16847,6 +17393,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1390);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -16935,7 +17486,13 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(2309);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -17023,6 +17580,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1386);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17107,6 +17669,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1719);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17191,6 +17758,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(836);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17279,6 +17851,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1225);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17367,6 +17944,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(660);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17455,6 +18037,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(787);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17547,6 +18134,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(782);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17635,6 +18227,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(663);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17727,6 +18324,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(745);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17815,6 +18417,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(922);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17903,6 +18510,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(738);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -17991,6 +18603,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1658);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -18079,6 +18696,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(721);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -18167,6 +18789,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(736);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -18263,6 +18890,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(770);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -18352,6 +18984,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1266);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -18441,6 +19078,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Search\", function () {\r",
 									"  pm.expect(pm.response.json().search).to.eql(pm.environment.get(\"search\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(761);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -18541,6 +19183,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Tokens\", function () {\r",
 									"  pm.expect(pm.response.json().token).to.eql(pm.environment.get(\"tokens\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(635);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -18638,6 +19285,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Tokens\", function () {\r",
 									"  pm.expect(pm.response.json().token).to.eql(pm.environment.get(\"tokens\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -18736,6 +19388,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Tokens\", function () {\r",
 									"  pm.expect(pm.response.json().token).to.eql(pm.environment.get(\"tokens\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(636);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -18910,6 +19567,12 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Tokens\", function () {\r",
 									"  pm.expect(pm.response.json().token).to.eql(pm.environment.get(\"tokens\"));\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -19232,6 +19895,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Webhooks\", function () {\r",
 									"  pm.expect(pm.response.json().webhooks).to.eql(pm.environment.get(\"webhooks\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(643);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -19381,10 +20049,10 @@
 									"  pm.expect(pm.response.code).to.eql(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validate that WebhooksId\", () => {\r",
+									"pm.test(\"Validate that Webhooks CallbackURL\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.value).to.eql(\"https://trello.com/ximevv\");\r",
+									"    pm.expect(responseJson.callbackUrl).to.eql(\"value\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that an object contains keys or properties\", () => {\r",
@@ -19420,6 +20088,11 @@
 									"\r",
 									"pm.test(\"Response property matches environment variable Webhooks\", function () {\r",
 									"  pm.expect(pm.response.json().webhooks).to.eql(pm.environment.get(\"webhooks\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"   //parse the response JSON and test properties\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(624);\r",
 									"});"
 								],
 								"type": "text/javascript"
