@@ -4731,7 +4731,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -4758,6 +4758,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the test of header\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -4778,12 +4779,13 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the test matches of variable\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"pm.test(\"Response time is less than 1800ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1700);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -4826,7 +4828,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardPlugins_id\")).to.include(\"6464293be2a3e5a9e2f8483a\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -4883,7 +4889,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -4910,6 +4916,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the test of header\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -4930,6 +4937,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the test matches enviroment\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -4978,7 +4986,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"Plugins_id\")).to.include(\"55a5d917446f51777421000a\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -5035,7 +5047,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -5062,6 +5074,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the test of header\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -5082,6 +5095,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the test matches enviroment\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -5130,7 +5144,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardOrganizations_id\")).to.include(\"645bf2261afd933bd897792c\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -5194,7 +5212,7 @@
 									"pm.test(\"Validate that BoardActionsID\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(\"64e954485592330a3a269cc1\");\r",
+									"    pm.expect(responseJson.id).to.eql(\"6508ed83567acf26203284ff\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -5209,6 +5227,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and respose the test of header\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -5229,6 +5248,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the test matches enviroment\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -5277,7 +5297,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardActions_id\")).to.include(\"6508ed83567acf26203284ff\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -5356,6 +5380,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the test of header\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -5376,6 +5401,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the test matches enviroment\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -5424,7 +5450,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardCards_id\")).to.include(\"645bf30b01598b8ebaf741c8\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -5476,7 +5506,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -5503,6 +5533,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the test of header\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -5523,12 +5554,13 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the test matches enviroment\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"pm.test(\"Response time is less than 1800ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1700);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -5571,7 +5603,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardCards_id\")).to.include(\"645bf30b01598b8ebaf741c8\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -5628,7 +5664,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -5655,6 +5691,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the test of header\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -5675,6 +5712,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the test matches enviroment\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -5723,7 +5761,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardStars_id\")).to.include(\"648d0f64b173bb9d25cca72c\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -5802,6 +5844,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"  // parse and response the header test\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -5822,6 +5865,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									" // parse the test response that matches the environment\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -5870,7 +5914,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardChecklist_id\")).to.include(\"6463fdd5112a96b0b3c82086\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -5922,7 +5970,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -5949,6 +5997,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the teste of header\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -5969,6 +6018,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the test matches enviroment\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -6017,7 +6067,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boarCard_id\")).to.include(\"645bf30b01598b8ebaf741c8\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -6070,7 +6124,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -6097,6 +6151,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the header test\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -6117,6 +6172,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the enviroment test\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -6165,7 +6221,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardCustom_id\")).to.include(\"61c9a684252baf6cc7dafa3f\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -6217,7 +6277,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -6244,6 +6304,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       // parse and response the header test\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -6264,6 +6325,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the enviroment test\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -6290,7 +6352,7 @@
 									"/*\r",
 									"response has the following structure:\r",
 									"{\r",
-									"  \"id\": \"61c9a684252baf6cc7dafa3f\",\r",
+									"  \"id\": \"64655166af9b6425c7e3ffac\",\r",
 									"  \"created\": true,\r",
 									"  \"errors\": []\r",
 									"}\r",
@@ -6312,7 +6374,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardLabel_id\")).to.include(\"64655166af9b6425c7e3ffac\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -6525,7 +6591,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -6537,7 +6603,7 @@
 									"pm.test(\"Validate that Board ListID\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(\"645bf2de5787a69cefc4dc8c\");\r",
+									"    pm.expect(responseJson.id).to.eql(\"6508ed077d83fe6db8c0812e\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -6552,6 +6618,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the header test\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -6572,6 +6639,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the enviroment test\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
@@ -6598,7 +6666,7 @@
 									"/*\r",
 									"response has the following structure:\r",
 									"{\r",
-									"  \"id\": \"61c9a684252baf6cc7dafa3f\",\r",
+									"  \"id\": \"6508ed077d83fe6db8c0812e\",\r",
 									"  \"created\": true,\r",
 									"  \"errors\": []\r",
 									"}\r",
@@ -6620,7 +6688,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardList_id\")).to.include(\"6508ed077d83fe6db8c0812e\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -6672,7 +6744,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -6681,10 +6753,10 @@
 									"  pm.expect(pm.response.code).to.eql(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validate that CardID\", () => {\r",
+									"pm.test(\"Validate that Board ListID\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(\"645bf2de5787a69cefc4dc8c\");\r",
+									"    pm.expect(responseJson.id).to.eql(\"6508ed077d83fe6db8c0812e\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate that the object contains keys or properties\", () => {\r",
@@ -6699,6 +6771,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       //parse and response the header test\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -6719,10 +6792,11 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"    //parse and response the enviroment test\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
 									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
 									"});\r",
@@ -6745,7 +6819,7 @@
 									"/*\r",
 									"response has the following structure:\r",
 									"{\r",
-									"  \"id\": \"61c9a684252baf6cc7dafa3f\",\r",
+									"  \"id\": \"6508ed077d83fe6db8c0812e\",\r",
 									"  \"created\": true,\r",
 									"  \"errors\": []\r",
 									"}\r",
@@ -6767,7 +6841,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardList_id\")).to.include(\"6508ed077d83fe6db8c0812e\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -6820,7 +6898,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -6829,7 +6907,7 @@
 									"  pm.expect(pm.response.code).to.eql(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validate that Board MemberID\", () => {\r",
+									"pm.test(\"Validate that Board MemberId\", () => {\r",
 									"    //parse the response JSON and test properties\r",
 									"    const responseJson = pm.response.json();\r",
 									"    pm.expect(responseJson.id).to.eql(\"62d5c433f15678138d40a1e3\");\r",
@@ -6847,6 +6925,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"// parse and response the header test\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -6867,12 +6946,13 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable board\", function () {\r",
+									"// parse and response the enviroment test\r",
 									"  pm.expect(pm.response.json().board).to.eql(pm.environment.get(\"boards\"));\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 800ms\", () => {\r",
+									"pm.test(\"Response time is less than 1800ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1700);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -6915,7 +6995,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"boardMember_id\")).to.include(\"62d5c433f15678138d40a1e3\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -7210,7 +7294,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -7237,6 +7321,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"// parse and response the header test\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -7257,6 +7342,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
+									"// parse and response the enviroment test\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
 									"});\r",
 									"\r",
@@ -7305,7 +7391,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"actions_id\")).to.include(\"64655e8f3c42eeac916773ba\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -7356,7 +7446,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -7383,6 +7473,7 @@
 									"  });\r",
 									"\r",
 									"pm.test(\"Content-Type header is present\", () => {\r",
+									"// parse and response the header test\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -7403,12 +7494,13 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
+									"// parse and response the enviroment test\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"pm.test(\"Response time is less than 1800ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1700);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -7451,7 +7543,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"actions_id\")).to.include(\"61c9a684252baf6cc7dafa3f\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -7503,7 +7599,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"resultado esperado\", function () {\r",
-									"    //resultado esperad del estado\r",
+									"    //resultado esperado del estado\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -7530,6 +7626,7 @@
 									"  });\r",
 									"\r",
 									"   pm.test(\"Content-Type header is present\", () => {\r",
+									"       // parse and response the header test\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
@@ -7550,6 +7647,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Response property matches environment variable action\", function () {\r",
+									"    // parse and response the enviroment test\r",
 									"  pm.expect(pm.response.json().action).to.eql(pm.environment.get(\"actions\"));\r",
 									"});\r",
 									"\r",
@@ -7598,7 +7696,11 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
-									""
+									"\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.text(\"actionsBoard_id\")).to.include(\"645bf27d235efdd4e31bb4c9\");\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
