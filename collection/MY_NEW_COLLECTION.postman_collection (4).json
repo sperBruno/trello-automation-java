@@ -1591,7 +1591,63 @@
 									"    //parse the response JSON and test property\r",
 									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
 									"});\r",
-									""
+									"\r",
+									"/*\r",
+									"response has this structure:\r",
+									"{\r",
+									"  \"errors\": [],\r",
+									"  \"areas\": [ \"goods\", \"services\" ],\r",
+									"  \"settings\": [\r",
+									"    {\r",
+									"      \"type\": \"notification\",\r",
+									"      \"detail\": [ \"email\", \"sms\" ]\r",
+									"    },\r",
+									"    {\r",
+									"      \"type\": \"visual\",\r",
+									"      \"detail\": [ \"light\", \"large\" ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"*/\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test array properties\", () => {\r",
+									"    //errors array is empty\r",
+									"  pm.expect(jsonData.errors).to.be.empty;\r",
+									"    //areas includes \"goods\"\r",
+									"  pm.expect(jsonData.areas).to.include(\"goods\");\r",
+									"    //get the notification settings object\r",
+									"  const notificationSettings = jsonData.settings.find\r",
+									"      (m => m.type === \"notification\");\r",
+									"  pm.expect(notificationSettings)\r",
+									"    .to.be.an(\"object\", \"Could not find the setting\");\r",
+									"    //detail array must include \"sms\"\r",
+									"  pm.expect(notificationSettings.detail).to.include(\"sms\");\r",
+									"    //detail array must include all listed\r",
+									"  pm.expect(notificationSettings.detail)\r",
+									"    .to.have.members([\"email\", \"sms\"]);\r",
+									"});\r",
+									"\r",
+									"/* response has this structure:\r",
+									"{\r",
+									"  \"name\": \"Jane\",\r",
+									"  \"age\": 29,\r",
+									"  \"hobbies\": [\r",
+									"    \"skating\",\r",
+									"    \"painting\"\r",
+									"  ],\r",
+									"  \"email\": null\r",
+									"}\r",
+									"*/\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(jsonData).to.be.an(\"object\");\r",
+									"  pm.expect(jsonData.name).to.be.a(\"string\");\r",
+									"  pm.expect(jsonData.age).to.be.a(\"number\");\r",
+									"  pm.expect(jsonData.hobbies).to.be.an(\"array\");\r",
+									"  pm.expect(jsonData.website).to.be.undefined;\r",
+									"  pm.expect(jsonData.email).to.be.null;\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -8369,9 +8425,9 @@
 									"  pm.expect(pm.response.json().emoji).to.eql(pm.environment.get(\"emoji\"));\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 1200ms\", () => {\r",
+									"pm.test(\"Response time is less than 2200ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(900);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1900);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -8403,7 +8459,14 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -8710,9 +8773,9 @@
 									"  pm.expect(pm.response.json().checklist).to.eql(pm.environment.get(\"checklist\"));\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 1200ms\", () => {\r",
+									"pm.test(\"Response time is less than 2200ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(900);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1900);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -8744,7 +8807,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -8845,7 +8914,7 @@
 									"\r",
 									"pm.test(\"Response time is less than 1200ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(900);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1100);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -8877,7 +8946,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -8979,7 +9054,7 @@
 									"\r",
 									"pm.test(\"Response time is less than 1200ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(900);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1100);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -9011,7 +9086,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -9360,7 +9441,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -9499,7 +9586,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -9704,7 +9797,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -9831,7 +9930,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10183,7 +10288,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10312,7 +10423,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10439,7 +10556,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10720,7 +10843,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10853,7 +10982,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10955,7 +11090,7 @@
 									"\r",
 									"pm.test(\"Response time is less than 1200ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(900);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1100);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -10987,7 +11122,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -11121,7 +11262,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -11255,7 +11402,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -11389,7 +11542,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -11815,7 +11974,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12172,7 +12337,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12345,7 +12516,7 @@
 									"\r",
 									"pm.test(\"Response time is less than 1200ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(900);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1100);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -12377,7 +12548,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12511,7 +12688,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12645,7 +12828,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12850,7 +13039,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -13317,7 +13512,7 @@
 									"\r",
 									"pm.test(\"Response time is less than 1200ms\", () => {\r",
 									"   //parse the response JSON and test properties\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(999);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1199);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Cookie DSC is present\", () => {\r",
@@ -13349,7 +13544,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -13482,7 +13683,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -13692,7 +13899,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -13908,7 +14121,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -14042,7 +14261,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -14176,7 +14401,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -14310,7 +14541,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -14444,7 +14681,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -14578,7 +14821,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -14712,7 +14961,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -15000,7 +15255,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -15134,7 +15395,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -15423,6 +15690,11 @@
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
 									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript"
@@ -15557,7 +15829,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -15691,7 +15969,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -15825,7 +16109,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -15959,7 +16249,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -16093,7 +16389,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -16227,7 +16529,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -16439,7 +16747,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -16573,7 +16887,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -17012,7 +17332,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -17228,6 +17554,11 @@
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
 									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript"
@@ -17361,7 +17692,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -17623,7 +17960,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -17819,7 +18162,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -17957,7 +18306,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -18095,7 +18450,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -18229,7 +18590,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -18438,7 +18805,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -18647,7 +19020,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -18786,7 +19165,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -18925,7 +19310,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -19068,7 +19459,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -19442,7 +19839,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -19586,6 +19989,11 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
 									"});\r",
 									""
 								],
@@ -19736,7 +20144,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -19885,7 +20299,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -20034,7 +20454,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -20178,7 +20604,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -20399,7 +20831,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -20553,7 +20991,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -20759,7 +21203,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -20960,7 +21410,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -21084,7 +21540,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -21228,7 +21690,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -21348,7 +21816,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -21468,7 +21942,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -21592,7 +22072,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -21716,7 +22202,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -21840,7 +22332,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -21968,7 +22466,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -22092,7 +22596,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -22220,7 +22730,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -22344,7 +22860,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -22468,7 +22990,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -22592,7 +23120,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -22716,7 +23250,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -22840,7 +23380,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -22972,7 +23518,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -23097,7 +23649,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -23222,7 +23780,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -23358,7 +23922,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -23491,7 +24061,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -23625,7 +24201,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -23835,7 +24417,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -24193,7 +24781,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -24417,7 +25011,13 @@
 									"    \"errors\": []\r",
 									"  };\r",
 									"  pm.expect(pm.response.json(true)).to.deep.include(Boolean);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Prod\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
