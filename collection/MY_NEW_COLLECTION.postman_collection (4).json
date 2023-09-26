@@ -1804,7 +1804,14 @@
 									"\r",
 									"  pm.test(\"Content-Type header is present\", () => {\r",
 									"  pm.response.to.have.header(\"Content-Type\");\r",
-									"});"
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -2635,7 +2642,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -2719,7 +2733,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3568,7 +3588,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3793,7 +3820,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3868,7 +3902,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3940,7 +3981,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4295,7 +4343,14 @@
 								"exec": [
 									"pm.test(\"resultado esperado\",()=>{\r",
 									"pm.response.to.have.status(200);\r",
-									"});"
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4372,7 +4427,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4445,7 +4507,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4518,7 +4587,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful GET request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -6220,7 +6296,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -6296,7 +6379,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -6810,7 +6899,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -6882,7 +6977,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -6959,7 +7060,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -8063,7 +8170,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -8433,7 +8546,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -8504,7 +8623,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -9377,7 +9502,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -9448,7 +9579,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -9520,7 +9657,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10244,7 +10387,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10315,7 +10464,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10386,7 +10542,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10891,7 +11054,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -10962,7 +11131,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -11908,7 +12083,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -11979,7 +12160,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12055,7 +12242,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12127,7 +12320,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12344,7 +12543,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12419,7 +12624,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12491,7 +12702,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -12712,7 +12929,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -13219,7 +13442,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -13435,7 +13664,14 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -13579,7 +13815,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful PUT request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -13651,7 +13893,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"\r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -13719,7 +13967,13 @@
 									"pm.expect({a: 1}).to.have.property('a');\r",
 									"pm.expect({a: 1, b: 2}).to.be.an('object')\r",
 									"  .that.has.all.keys('a', 'b');\r",
-									"  });"
+									"  });\r",
+									"  \r",
+									"pm.test(\"Successful POST request\", () => {\r",
+									"    //parse the response JSON and test property\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript"
 							}
