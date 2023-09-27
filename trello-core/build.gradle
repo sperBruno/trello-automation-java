@@ -2,13 +2,6 @@ plugins {
     id 'java'
 }
 
-group = 'com.trello'
-version = '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
 
     // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
