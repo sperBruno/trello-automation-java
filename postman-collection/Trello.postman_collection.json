@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "6a0442b6-d5da-4bc5-bd67-43131ee0dc02",
+		"name": "Trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30344252",
+		"_collection_link": "https://blue-satellite-523948.postman.co/workspace/AT-08~6999d06d-96b3-467c-8aee-0d8d1a7132b8/collection/30344252-6a0442b6-d5da-4bc5-bd67-43131ee0dc02?action=share&source=collection_link&creator=30344252"
+	},
+	"item": [
+		{
+			"name": "Board",
+			"item": [
+				{
+					"name": "Create a board",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/?name=AT-08-class-1&key=&token=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "AT-08-class-1"
+								},
+								{
+									"key": "key",
+									"value": ""
+								},
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a board",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/65249a45c5fbd99ba696a39c?key=&token=&name=AT-08-class-1-updated",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"65249a45c5fbd99ba696a39c"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": ""
+								},
+								{
+									"key": "token",
+									"value": ""
+								},
+								{
+									"key": "name",
+									"value": "AT-08-class-1-updated"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a board",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/65249a45c5fbd99ba696a39c?key=&token=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"65249a45c5fbd99ba696a39c"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": ""
+								},
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "Create a card",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.trello.com/1/cards?idList=65249c5ff4537a0bd8798b9f&key=&token=&name=testing card",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"cards"
+							],
+							"query": [
+								{
+									"key": "idList",
+									"value": "65249c5ff4537a0bd8798b9f"
+								},
+								{
+									"key": "key",
+									"value": ""
+								},
+								{
+									"key": "token",
+									"value": ""
+								},
+								{
+									"key": "name",
+									"value": "testing card"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get a card",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.trello.com/1/cards/65249cc90e5f7036568c3440?key=&token=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"cards",
+								"65249cc90e5f7036568c3440"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": ""
+								},
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lists",
+			"item": [
+				{
+					"name": "Create a list",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/65249a45c5fbd99ba696a39c/lists?name=Backlog&key=&token=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"65249a45c5fbd99ba696a39c",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Backlog"
+								},
+								{
+									"key": "key",
+									"value": ""
+								},
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
