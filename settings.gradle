@@ -6,3 +6,4 @@
  */
 
 rootProject.name = 'trello-automation'
+include 'trello-api'
