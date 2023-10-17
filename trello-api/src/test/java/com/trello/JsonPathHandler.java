@@ -1,7 +1,7 @@
 package com.trello;
 
 
-import org.trello.utils.JsonPath;
+import com.trello.utils.JsonPath;
 
 public final class JsonPathHandler {
 

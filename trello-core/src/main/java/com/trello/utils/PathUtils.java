@@ -1,4 +1,4 @@
-package org.trello.utils;
+package com.trello.utils;
 
 import java.io.File;
 import java.util.regex.Matcher;

@@ -1,6 +1,6 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.trello.utils.PropertiesInfo;
+import com.trello.utils.PropertiesInfo;
 
 public class TestProperties {
 

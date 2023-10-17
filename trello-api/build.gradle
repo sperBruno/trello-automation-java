@@ -9,5 +9,9 @@ dependencies {
 }
 
 test {
-    useTestNG()
+    useTestNG()  {
+        useDefaultListeners = true
+//            listeners << 'org.trello.reports.ExtentReportsListener'
+        listeners.add("com.trello.reports.ExtentReportsListener")
+    }
 }
