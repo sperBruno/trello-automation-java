@@ -5,3 +5,6 @@
 build
 .idea
 *.log
+/report/
+/reports/
+/trello-api/reports/
