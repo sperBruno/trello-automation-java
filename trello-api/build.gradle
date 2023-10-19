@@ -5,7 +5,7 @@ plugins {
 dependencies {
     implementation project(":trello-core")
     // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
-    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.2'
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.2'
     // https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator
     implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '5.3.2'
 
@@ -13,4 +13,34 @@ dependencies {
 
 test {
     useTestNG()
+}
+
+tasks.register("executeApiFeature", Test) {
+    outputs.upToDateWhen { false }
+    useTestNG()
+    scanForTestClasses = false
+    options {
+        useDefaultListeners = false
+        jvmArgs = ["-Dcucumber.features=${rootProject.rootDir}/trello-api/src/test/resources/features/"]
+        jvmArgs = ["-Dcucumber.plugin=pretty, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"]
+        jvmArgs = ["-Dcucumber.filter.tags=" + tags]
+        jvmArgs = ["-Denv=" + env]
+        testLogging.showStandardStreams = true
+    }
+}
+
+
+task apiFeatures(type: Test) {
+    useTestNG()
+    options {
+        jvmArgs = ["-Dcucumber.features=${rootProject.rootDir}/trello-api/src/test/resources/features/"]
+        jvmArgs = ['-Dcucumber.execution.strict=' + true]
+        jvmArgs = ['-Dcucumber.plugin=io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm']
+        jvmArgs = ["-Dcucumber.filter.tags=" + tags]
+        jvmArgs = ["-Denv=" + env]
+    }
+    // Flag to show console output.
+    testLogging.showStandardStreams = true
+    // Flag to scan for classes with @Test annotation.
+    scanForTestClasses = false
 }

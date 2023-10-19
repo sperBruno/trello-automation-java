@@ -1,5 +1,6 @@
 package com.trello;
 
+import com.trello.client.RequestManager;
 import com.trello.utils.JsonPath;
 import com.trello.utils.PropertiesInfo;
 import io.restassured.RestAssured;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BoardTest {
-    private RequestSpecification requestSpec;
+
     private ResponseSpecification responseSpec;
     private String apiKey;
     private String apiToken;
@@ -26,10 +27,10 @@ public class BoardTest {
     private Map<String, String> queryParams;
 
     private String boardID;
-    private RequestHandler request;
+    private ApiRequestHandler request;
     @BeforeClass
     public void setUp() {
-        request = new RequestHandler();
+        request = new ApiRequestHandler();
 
         apiKey = PropertiesInfo.getInstance().getApiKey();
         apiToken = PropertiesInfo.getInstance().getApiToken();
@@ -45,14 +46,8 @@ public class BoardTest {
         queryParams.put("key", apiKey);
         queryParams.put("token", apiToken);
 
-        request.setBaseUrl(String.format("%s/%s", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion()));
-
         request.setHeaders(headers);
         request.setQueryParam(queryParams);
-
-        requestSpec = new RequestSpecBuilder()
-                .setBaseUri(request.getBaseUrl()).build();
     }
 
 //    @Test
@@ -111,16 +106,12 @@ public class BoardTest {
 
         String boardName = "bruno test board 1-2";
 
-//        queryParams.put("name", boardName);
         request.setQueryParam("name", boardName);
+        request.setEndpoint("/boards/");
 
         //Act
-        var response = RestAssured.given()
-                .spec(requestSpec)
-                .log().all().when()
-                .headers(request.getHeaders())
-                .queryParams(request.getQueryParams())
-                .post("/boards/")
+        var response = RequestManager.post(request);
+                response
                 .then()
                 .and()
                 .assertThat ()
@@ -144,52 +135,45 @@ public class BoardTest {
         //AAA
         //Arrange
         String boardName = "bruno test board 1-2 Updated";
-
-        queryParams.put("name", boardName);
-
+        request.setQueryParam("name", boardName);
+        request.setEndpoint(String.format("/boards/%s", boardID));
         //Act
-        var response = RestAssured.given()
-                .spec(requestSpec)
-                .log().all().when()
-                .headers(headers)
-                .queryParams(queryParams)
-                .put(String.format("/boards/%s", boardID));
+        var response = RequestManager.put(request);
         System.out.println(response.getBody().asPrettyString());
         //Asserts
         Assert.assertEquals(response.statusCode(), 200);
+        String name = JsonPath.getResult(response.getBody().asPrettyString(), "$.name");
+        Assert.assertEquals(name, "bruno test board 1-2 Updated");
     }
 
     @Test(priority = 2)
     public void getBoardTest() {
+        //Given
         InputStream getBoardJsonSchema = getClass ().getClassLoader ()
                 .getResourceAsStream ("schemas/getBoardSchema.json");
         queryParams.remove("name");
-        var response = RestAssured.given()
-                .spec(requestSpec)
-                .log().all().when()
-                .headers(headers)
-                .queryParams(queryParams)
-                .get(String.format("/boards/%s", boardID)).then()
+        request.setEndpoint(String.format("/boards/%s", boardID));
+
+        //When
+        var response = RequestManager.get(request);
+                response.then()
                 .spec(responseSpec)
                 .and()
                 .assertThat()
                 .body (JsonSchemaValidator.matchesJsonSchema (getBoardJsonSchema))
                 .extract().response();
         System.out.println(response.getBody().asPrettyString());
-//        String name = response.path("name");
-        String name = JsonPath.getResult(response.getBody().asPrettyString(), "$.name");
 
+        //Then
+        String name = JsonPath.getResult(response.getBody().asPrettyString(), "$.name");
         Assert.assertEquals(name, "bruno test board 1-2 Updated");
     }
 
     @Test(priority = 6)
     public void deleteBoardTest() {
-        var response = RestAssured.given()
-                .spec(requestSpec)
-                .log().all().when()
-                .headers(headers)
-                .queryParams(queryParams)
-                .delete(String.format("/boards/%s", boardID)).then()
+        request.setEndpoint(String.format("/boards/%s", boardID));
+        var response = RequestManager.delete(request)
+                .then()
                 .spec(responseSpec).extract().response();
         System.out.println("Board Deleted");
         System.out.println(response.getBody().asPrettyString());
