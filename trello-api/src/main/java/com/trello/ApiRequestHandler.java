@@ -8,14 +8,16 @@ public class ApiRequestHandler {
     private Map<String, String> queryParams;
     private String baseUrl;
     private String endpoint;
+
     public ApiRequestHandler() {
-        headers =  new HashMap<>();
+        headers = new HashMap<>();
         queryParams = new HashMap<>();
     }
 
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
     }
+
     public void setQueryParam(Map<String, String> queryParam) {
         this.queryParams.putAll(queryParam);
     }
@@ -32,11 +34,11 @@ public class ApiRequestHandler {
         this.queryParams.put(key, value);
     }
 
-    public Map<String,String> getHeaders() {
+    public Map<String, String> getHeaders() {
         return this.headers;
     }
 
-    public Map<String,?> getQueryParams() {
+    public Map<String, ?> getQueryParams() {
         return this.queryParams;
     }
 
