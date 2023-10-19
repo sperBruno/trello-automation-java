@@ -8,11 +8,10 @@ import io.cucumber.testng.CucumberOptions;
  */
 @CucumberOptions(
         plugin = {"pretty", "json:reports/cucumber.json", "junit:reports/cucumber.xml",
-                    "html:reports/cucumber-html-report.html",
+                "html:reports/cucumber-html-report.html",
                 "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
         features = {"src/test/resources/features"},
         glue = {"com.trello.api"}
-//        strict = true
 )
 public class CucumberRunner extends AbstractTestNGCucumberTests {
 }

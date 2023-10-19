@@ -3,12 +3,9 @@ package com.trello;
 import com.trello.client.RequestManager;
 import com.trello.utils.JsonPath;
 import com.trello.utils.PropertiesInfo;
-import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
-import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -28,6 +25,7 @@ public class BoardTest {
 
     private String boardID;
     private ApiRequestHandler request;
+
     @BeforeClass
     public void setUp() {
         request = new ApiRequestHandler();
@@ -101,8 +99,8 @@ public class BoardTest {
     @Test(priority = 1)
     public void testCreateBoardSchemaValidation() {
         //Arrange
-        InputStream createBoardJsonSchema = getClass ().getClassLoader ()
-                .getResourceAsStream ("schemas/createBoardSchema.json");
+        InputStream createBoardJsonSchema = getClass().getClassLoader()
+                .getResourceAsStream("schemas/createBoardSchema.json");
 
         String boardName = "bruno test board 1-2";
 
@@ -111,12 +109,13 @@ public class BoardTest {
 
         //Act
         var response = RequestManager.post(request);
-                response
+        response
                 .then()
                 .and()
-                .assertThat ()
-                .body (JsonSchemaValidator.matchesJsonSchema (createBoardJsonSchema))
-                .extract().response();;
+                .assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchema(createBoardJsonSchema))
+                .extract().response();
+        ;
 
         System.out.println(response.getBody().asPrettyString());
         //Assert
@@ -149,18 +148,18 @@ public class BoardTest {
     @Test(priority = 2)
     public void getBoardTest() {
         //Given
-        InputStream getBoardJsonSchema = getClass ().getClassLoader ()
-                .getResourceAsStream ("schemas/getBoardSchema.json");
+        InputStream getBoardJsonSchema = getClass().getClassLoader()
+                .getResourceAsStream("schemas/getBoardSchema.json");
         queryParams.remove("name");
         request.setEndpoint(String.format("/boards/%s", boardID));
 
         //When
         var response = RequestManager.get(request);
-                response.then()
+        response.then()
                 .spec(responseSpec)
                 .and()
                 .assertThat()
-                .body (JsonSchemaValidator.matchesJsonSchema (getBoardJsonSchema))
+                .body(JsonSchemaValidator.matchesJsonSchema(getBoardJsonSchema))
                 .extract().response();
         System.out.println(response.getBody().asPrettyString());
 

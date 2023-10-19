@@ -9,17 +9,21 @@ import io.cucumber.java.Before;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.ResponseSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ApiHooks {
+    private static final Logger LOGGER = LogManager.getLogger(ApiHooks.class.getSimpleName());
     private Map<String, String> headers;
     private Map<String, String> queryParams;
     private ApiRequestHandler request;
 
     private ResponseSpecification responseSpec;
     private Context context;
+
     public ApiHooks(Context context) {
         this.context = context;
         responseSpec = new ResponseSpecBuilder().expectStatusCode(200)
@@ -35,6 +39,7 @@ public class ApiHooks {
         request.setHeaders(headers);
         request.setQueryParam(queryParams);
     }
+
     @Before()
     public void beforeAllHook() {
         System.out.println("This is the before all hook.");
@@ -43,11 +48,11 @@ public class ApiHooks {
     @After("@deleteBoard")
     public void deleteBoardHook() {
         String boardId = context.getProperty("boardId");
-        System.out.println(String.format("BoardId %s from hook ", boardId));
+        LOGGER.info(String.format("BoardId %s from hook ", boardId));
         request.setEndpoint(String.format("/boards/%s", boardId));
         var response = RequestManager.delete(request)
                 .then()
                 .spec(responseSpec).extract().response();
-        System.out.println(response.getBody().asPrettyString());
+        LOGGER.info("Board deleted by hook: ".concat(response.getBody().asPrettyString()));
     }
 }

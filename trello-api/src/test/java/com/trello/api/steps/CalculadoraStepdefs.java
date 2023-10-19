@@ -9,6 +9,7 @@ public class CalculadoraStepdefs {
     private int number1;
     private int number2;
     private int result;
+
     @Given("I have {string} with value {int}")
     public void iHaveNumberWithValue(String numberName, int number) {
         if (numberName.contains("1")) {
@@ -22,10 +23,10 @@ public class CalculadoraStepdefs {
     @When("I perform the {string} of number1 and number2")
     public void iPerformTheMethodOfNumberAndNumber(String method) {
         if (method.equalsIgnoreCase("addition")) {
-            result =  number1 + number2;
+            result = number1 + number2;
         }
         if (method.equalsIgnoreCase("subtraction")) {
-            result =  number1 - number2;
+            result = number1 - number2;
         }
 
     }

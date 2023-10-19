@@ -3,21 +3,18 @@ package com.trello.api.steps;
 import com.trello.ApiRequestHandler;
 import com.trello.api.Context;
 import com.trello.client.RequestManager;
-import com.trello.utils.JsonPath;
 import com.trello.utils.PropertiesInfo;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.testng.Assert;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BoardStepdefs {
+    private static final Logger LOGGER = LogManager.getLogger(BoardStepdefs.class.getSimpleName());
     private Map<String, String> headers;
     private Map<String, String> queryParams;
     private ApiRequestHandler request;
@@ -28,6 +25,7 @@ public class BoardStepdefs {
     public BoardStepdefs(Context context) {
         this.context = context;
     }
+
     @Given("I set apiRequestHandler with proper credential")
     public void iSetApiRequestHandlerWithProperCredential() {
         headers = new HashMap<String, String>();
@@ -40,6 +38,7 @@ public class BoardStepdefs {
         request.setHeaders(headers);
         request.setQueryParam(queryParams);
     }
+
     @When("I create a board with name {string}")
     public void iCreateABoardWithName(String boardName) {
         request.setQueryParam("name", boardName);
@@ -50,7 +49,7 @@ public class BoardStepdefs {
         context.setProperty("createBoardResponse", response.getBody().asPrettyString());
         context.setResponse(response);
         boardID = response.getBody().path("id");
-        System.out.println(String.format("boardID: %s", boardID));
+        LOGGER.info(String.format("boardID: %s", boardID));
         context.setProperty("boardId", boardID);
     }
 
