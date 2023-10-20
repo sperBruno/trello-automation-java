@@ -20,7 +20,11 @@ public class BoardAsserts {
 
     @Then("I should see field {string} with value {string}")
     public void iShouldSeeFieldWithValue(String field, String value) {
-        String actualResult = JsonPath.getResult(context.getProperty("createBoardResponse"), String.format("$.%s", field));
+//        String actualResult = JsonPath.getResult(context.getProperty("createBoardResponse"), String.format("$.%s", field));
+        String getResponse = context.getResponse().getBody().asPrettyString();
+        LOGGER.info("----------getResponse");
+        LOGGER.info(getResponse);
+        String actualResult = JsonPath.getResult(getResponse, String.format("$.%s", field));
         LOGGER.info(String.format("New board name: %s", actualResult));
         Assert.assertEquals(actualResult, value, String.format("board name does not match with expected value: %s", value));
     }
@@ -36,6 +40,16 @@ public class BoardAsserts {
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(createBoardJsonSchema))
                 .extract().response();
-        ;
+    }
+
+
+    @Then("I should see response body as {string}")
+    public void iShouldSeeResponseBodyAsValue(String responseBody) {
+        Assert.assertEquals(context.getResponse().getBody().asPrettyString(), responseBody);
+    }
+
+    @Then("I validate that status code of response is {int}")
+    public void iValidateThatStatusCodeOfResponseIs(int statusCode) {
+        Assert.assertEquals(context.getResponse().statusCode(), statusCode);
     }
 }
