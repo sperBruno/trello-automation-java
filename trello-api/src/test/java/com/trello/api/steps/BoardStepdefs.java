@@ -55,27 +55,22 @@ public class BoardStepdefs {
 
     @When("I get a board with {string}")
     public void iGetABoardWith(String boardID) {
-        request.getQueryParams().remove("name");
         this.boardID = boardID.contains("boardId") ? context.getProperty("boardId") : boardID;
-        request.setEndpoint("/boards/".concat(this.boardID));
-        response = RequestManager.get(request);
+        response = this.boards.getBoard(this.boardID);
         context.setResponse(response);
     }
 
     @When("I update board name with {string}")
     public void iUpdateBoardNameWith(String newBoardName) {
-        request.setQueryParam("name", newBoardName);
-        request.setEndpoint(String.format("/boards/%s", context.getProperty("boardId")));
-
-        var response = RequestManager.put(request);
+        this.boards.setQueryParam("name", newBoardName);
+        var response = this.boards.updateBoard(context.getProperty("boardId"));
         context.setResponse(response);
     }
 
     @When("I delete a board with {string}")
     public void iDeleteABoardWith(String boardId) {
         this.boardID = boardId.contains("boardId") ? context.getProperty("boardId") : boardId;
-        request.setEndpoint(String.format("/boards/%s", this.boardID));
-        var response = RequestManager.delete(request);
+        var response = this.boards.deleteBoard(this.boardID);
         context.setResponse(response);
     }
 }

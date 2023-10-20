@@ -29,4 +29,24 @@ public class Boards {
         request.setEndpoint("/boards/");
         return  RequestManager.post(request);
     }
+
+    public Response deleteBoard(String boardId) {
+        request.setEndpoint(String.format("/boards/%s", boardId));
+        return RequestManager.delete(request);
+    }
+
+    public Response getBoard(String boardID) {
+        request.getQueryParams().remove("name");
+        request.setEndpoint("/boards/".concat(boardID));
+        return RequestManager.get(request);
+    }
+
+    public Response updateBoard(String boardId) {
+        request.setEndpoint(String.format("/boards/%s", boardId));
+        return RequestManager.put(request);
+    }
+
+    public void setQueryParam(String key, String value) {
+        request.setQueryParam(key, value);
+    }
 }
