@@ -18,6 +18,8 @@ import java.util.Map;
 /**
  * We can comment or delete this class since it already automated using cucumber.
  */
+
+/**
 public class BoardTest {
 
     private ResponseSpecification responseSpec;
@@ -185,3 +187,4 @@ public class BoardTest {
 //                """;
     }
 }
+ **/
