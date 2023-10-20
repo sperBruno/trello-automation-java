@@ -2,7 +2,7 @@ Feature: calculadora
   Background:
     Given I set a message
   @Calculadora
-  Scenario Outline: Suma
+  Scenario Outline: Operaciones Matematicas
     Given I have "number1" with value <number1Value>
       And I have "number2" with value <number2Value>
     When I perform the "<method>" of number1 and number2

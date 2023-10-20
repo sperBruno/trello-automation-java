@@ -15,6 +15,9 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * We can comment or delete this class since it already automated using cucumber.
+ */
 public class BoardTest {
 
     private ResponseSpecification responseSpec;
@@ -176,5 +179,9 @@ public class BoardTest {
                 .spec(responseSpec).extract().response();
         System.out.println("Board Deleted");
         System.out.println(response.getBody().asPrettyString());
+
+//        """
+//                {\"value\": null}
+//                """;
     }
 }
