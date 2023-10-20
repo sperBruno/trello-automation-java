@@ -34,4 +34,10 @@ public class Boards {
         request.setEndpoint(String.format("/boards/%s", boardId));
         return RequestManager.delete(request);
     }
+
+    public Response getBoard(String boardID) {
+        request.getQueryParams().remove("name");
+        request.setEndpoint("/boards/".concat(boardID));
+        return RequestManager.get(request);
+    }
 }

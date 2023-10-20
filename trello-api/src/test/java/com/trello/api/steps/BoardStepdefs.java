@@ -55,10 +55,8 @@ public class BoardStepdefs {
 
     @When("I get a board with {string}")
     public void iGetABoardWith(String boardID) {
-        request.getQueryParams().remove("name");
         this.boardID = boardID.contains("boardId") ? context.getProperty("boardId") : boardID;
-        request.setEndpoint("/boards/".concat(this.boardID));
-        response = RequestManager.get(request);
+        response = this.boards.getBoard(this.boardID);
         context.setResponse(response);
     }
 
@@ -74,8 +72,7 @@ public class BoardStepdefs {
     @When("I delete a board with {string}")
     public void iDeleteABoardWith(String boardId) {
         this.boardID = boardId.contains("boardId") ? context.getProperty("boardId") : boardId;
-        request.setEndpoint(String.format("/boards/%s", this.boardID));
-        var response = RequestManager.delete(request);
+        var response = this.boards.deleteBoard(this.boardID);
         context.setResponse(response);
     }
 }
