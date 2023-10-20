@@ -62,10 +62,8 @@ public class BoardStepdefs {
 
     @When("I update board name with {string}")
     public void iUpdateBoardNameWith(String newBoardName) {
-        request.setQueryParam("name", newBoardName);
-        request.setEndpoint(String.format("/boards/%s", context.getProperty("boardId")));
-
-        var response = RequestManager.put(request);
+        this.boards.setQueryParam("name", newBoardName);
+        var response = this.boards.updateBoard(context.getProperty("boardId"));
         context.setResponse(response);
     }
 

@@ -40,4 +40,13 @@ public class Boards {
         request.setEndpoint("/boards/".concat(boardID));
         return RequestManager.get(request);
     }
+
+    public Response updateBoard(String boardId) {
+        request.setEndpoint(String.format("/boards/%s", boardId));
+        return RequestManager.put(request);
+    }
+
+    public void setQueryParam(String key, String value) {
+        request.setQueryParam(key, value);
+    }
 }
