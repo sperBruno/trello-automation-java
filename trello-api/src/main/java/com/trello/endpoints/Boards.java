@@ -29,4 +29,9 @@ public class Boards {
         request.setEndpoint("/boards/");
         return  RequestManager.post(request);
     }
+
+    public Response deleteBoard(String boardId) {
+        request.setEndpoint(String.format("/boards/%s", boardId));
+        return RequestManager.delete(request);
+    }
 }
