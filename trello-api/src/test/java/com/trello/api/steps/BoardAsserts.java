@@ -43,9 +43,9 @@ public class BoardAsserts {
     }
 
 
-    @Then("I should see response body as {string}")
+    @Then("I should see response body as")
     public void iShouldSeeResponseBodyAsValue(String responseBody) {
-        Assert.assertEquals(context.getResponse().getBody().asPrettyString(), responseBody);
+        Assert.assertEquals(context.getResponse().getBody().asString().stripTrailing(), responseBody);
     }
 
     @Then("I validate that status code of response is {int}")
