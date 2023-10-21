@@ -1,177 +1,190 @@
 package com.trello;
 
-import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
+import com.trello.client.RequestManager;
+import com.trello.utils.JsonPath;
+import com.trello.utils.PropertiesInfo;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import io.restassured.module.jsv.JsonSchemaValidator;
+import io.restassured.specification.ResponseSpecification;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.trello.utils.PropertiesInfo;
 
+import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * We can comment or delete this class since it already automated using cucumber.
+ */
+
+/**
 public class BoardTest {
-    private static final Logger LOGGER = LogManager.getLogger(BoardTest.class.getSimpleName());
-    @Test
-    public void CreateBoard() {
-        var endpoint = String.format("%s/%s/boards", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion());
-        var headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        var queryParams = new HashMap<String, String>();
-        String boardName = "AT-08-java1213";
-        queryParams.put("name", boardName);
-        queryParams.put("key", PropertiesInfo.getInstance().getApiKey());
-        queryParams.put("token", PropertiesInfo.getInstance().getApiToken());
-        var response = RestAssured.given().log().all().when().headers(headers).queryParams(queryParams).post(endpoint);
-        LOGGER.info(response.getBody().asPrettyString());
-        Assert.assertEquals(response.statusCode(), 200);
 
-        String actualBoardName = JsonPathHandler.getBoardName(response.getBody().asPrettyString());
-        LOGGER.info(actualBoardName);
-        Assert.assertEquals(boardName, actualBoardName, String.format("Actual board name: %s, does not match with %s ", actualBoardName, boardName));
-    }
+    private ResponseSpecification responseSpec;
+    private String apiKey;
+    private String apiToken;
+    private Map<String, String> headers;
+    private Map<String, String> queryParams;
 
-    @Test
-    public void CreateBoardSpecBuilder() {
-        var requestSpec = new RequestSpecBuilder().setBaseUri(String.format("%s/%s/", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion()) ).build();
-//        var endpoint = String.format("%s/%s/boards", PropertiesInfo.getInstance().getBaseApi(),
-//                PropertiesInfo.getInstance().getApiVersion());
-        var headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        var queryParams = new HashMap<String, String>();
-        String boardName = "AT-08-java1213";
-        queryParams.put("name", boardName);
-        queryParams.put("key", PropertiesInfo.getInstance().getApiKey());
-        queryParams.put("token", PropertiesInfo.getInstance().getApiToken());
-        var response = RestAssured.given().spec(requestSpec).log().all().when().headers(headers).queryParams(queryParams).post("/boards");
-        LOGGER.info(response.getBody().asPrettyString());
-        Assert.assertEquals(response.statusCode(), 200);
+    private String boardID;
+    private ApiRequestHandler request;
 
-        String actualBoardName = JsonPathHandler.getBoardName(response.getBody().asPrettyString());
-        LOGGER.info(actualBoardName);
-        Assert.assertEquals(boardName, actualBoardName, String.format("Actual board name: %s, does not match with %s ", actualBoardName, boardName));
-    }
+    @BeforeClass
+    public void setUp() {
+        request = new ApiRequestHandler();
 
-    @Test
-    public void CreateBoardResponseSpec() {
-        var requestSpec = new RequestSpecBuilder().setBaseUri(String.format("%s/%s/", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion()) ).build();
-        var responseSpec =  new ResponseSpecBuilder()
-                .expectStatusCode(200)
+        apiKey = PropertiesInfo.getInstance().getApiKey();
+        apiToken = PropertiesInfo.getInstance().getApiToken();
+
+        responseSpec = new ResponseSpecBuilder().expectStatusCode(200)
                 .expectContentType(ContentType.JSON)
                 .build();
-//        var endpoint = String.format("%s/%s/boards", PropertiesInfo.getInstance().getBaseApi(),
-//                PropertiesInfo.getInstance().getApiVersion());
-        var headers = new HashMap<String, String>();
+
+        headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
-        var queryParams = new HashMap<String, String>();
-        String boardName = "AT-08-java1213";
-        queryParams.put("name", boardName);
-        queryParams.put("key", PropertiesInfo.getInstance().getApiKey());
-        queryParams.put("token", PropertiesInfo.getInstance().getApiToken());
-        var response = RestAssured.given().spec(requestSpec).log().all().when().headers(headers).queryParams(queryParams).post("/boards")
-                .then().spec(responseSpec).extract().response();
-        LOGGER.info(response.getBody().asPrettyString());
-////        Assert.assertEquals(response.statusCode(), 200);
+
+        queryParams = new HashMap<String, String>();
+        queryParams.put("key", apiKey);
+        queryParams.put("token", apiToken);
+
+        request.setHeaders(headers);
+        request.setQueryParam(queryParams);
+    }
+
+//    @Test
+//    public void testCreateBoard() {
+//        //Arrange
+//        String boardName = "bruno test board 1 to test body";
 //
-        String actualBoardName = JsonPathHandler.getBoardName(response.getBody().asPrettyString());
-        LOGGER.info(actualBoardName);
-        Assert.assertEquals(boardName, actualBoardName, String.format("Actual board name: %s, does not match with %s ", actualBoardName, boardName));
+//        queryParams.put("name", boardName);
+//
+//        //Act
+//        var response = RestAssured.given()
+//                .spec(requestSpec).log().all().when()
+//                .headers(headers)
+//                .queryParams(queryParams)
+//                .post("/boards/")
+//                .then()
+//                .spec(responseSpec).extract().response();
+//        //Assert
+//        System.out.println(response.getBody().asPrettyString());
+//    }
+
+//    @Test(priority = 1)
+//    public void testCreateBoardReqSpec() {
+//        //Arrange
+//
+//        String boardName = "bruno test board 1-2";
+//
+////        queryParams.put("name", boardName);
+//        request.setQueryParam("name", boardName);
+//
+//        //Act
+//        var response = RestAssured.given()
+//                .spec(requestSpec)
+//                .log().all().when()
+//                .headers(request.getHeaders())
+//                .queryParams(request.getQueryParams())
+//                .post("/boards/");
+//
+//        System.out.println(response.getBody().asPrettyString());
+//        //Assert
+//        Assert.assertEquals(response.statusCode(), 200);
+//
+//        boardID = response.getBody().path("id");
+//        System.out.println(String.format("boardID: %s", boardID));
+//
+//        String name = JsonPath.getResult(response.getBody().asPrettyString(), "$.name");
+//        System.out.println(String.format("New board name: %s", name));
+//        Assert.assertEquals(name, boardName);
+//    }
+
+    @Test(priority = 1)
+    public void testCreateBoardSchemaValidation() {
+        //Arrange
+        InputStream createBoardJsonSchema = getClass().getClassLoader()
+                .getResourceAsStream("schemas/createBoardSchema.json");
+
+        String boardName = "bruno test board 1-2";
+
+        request.setQueryParam("name", boardName);
+        request.setEndpoint("/boards/");
+
+        //Act
+        var response = RequestManager.post(request);
+        response
+                .then()
+                .and()
+                .assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchema(createBoardJsonSchema))
+                .extract().response();
+        ;
+
+        System.out.println(response.getBody().asPrettyString());
+        //Assert
+        Assert.assertEquals(response.statusCode(), 200);
+
+        boardID = response.getBody().path("id");
+        System.out.println(String.format("boardID: %s", boardID));
+
+        String name = JsonPath.getResult(response.getBody().asPrettyString(), "$.name");
+        System.out.println(String.format("New board name: %s", name));
+        Assert.assertEquals(name, boardName);
     }
 
-    @Test
+    @Test(priority = 2)
     public void UpdateBoard() {
-        // AAA
-        // Arrange
-        var createBoard = String.format("%s/%s/boards", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion());
-        var headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        var queryParams = new HashMap<String, String>();
-        String boardName = "AT-08-java1241dd23";
-        queryParams.put("name", boardName);
-        queryParams.put("key", PropertiesInfo.getInstance().getApiKey());
-        queryParams.put("token", PropertiesInfo.getInstance().getApiToken());
-        var response = RestAssured.given().log().all().when().headers(headers).queryParams(queryParams).post(createBoard);
-        LOGGER.info(response.getBody().asString());
-        var boardId = JsonPathHandler.getId(response.getBody().asString());
-        // Act
-
-        var boardNameUpdated = "Board Updated";
-        var updateBoardEndpoint = String.format(String.format("%s/%s/boards/%s", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion(), boardId));
-        queryParams.put("name", boardNameUpdated);
-        response = RestAssured.given().log().all().when().headers(headers).queryParams(queryParams).put(updateBoardEndpoint);
-        // Assert
+        //AAA
+        //Arrange
+        String boardName = "bruno test board 1-2 Updated";
+        request.setQueryParam("name", boardName);
+        request.setEndpoint(String.format("/boards/%s", boardID));
+        //Act
+        var response = RequestManager.put(request);
+        System.out.println(response.getBody().asPrettyString());
+        //Asserts
         Assert.assertEquals(response.statusCode(), 200);
-        Assert.assertNotEquals(JsonPathHandler.getBoardName(response.getBody().asString()), boardName);
-        Assert.assertEquals(JsonPathHandler.getBoardName(response.getBody().asString()), boardNameUpdated);
-        Assert.assertEquals(JsonPathHandler.getId(response.getBody().asString()), boardId);
+        String name = JsonPath.getResult(response.getBody().asPrettyString(), "$.name");
+        Assert.assertEquals(name, "bruno test board 1-2 Updated");
     }
 
-    @Test
+    @Test(priority = 2)
     public void getBoardTest() {
-        // AAA
-        // Arrange
-        var createBoard = String.format("%s/%s/boards", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion());
-        var headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        var queryParams = new HashMap<String, String>();
-        String boardName = "AT-08-java1241dd23";
-        queryParams.put("name", boardName);
-        queryParams.put("key", PropertiesInfo.getInstance().getApiKey());
-        queryParams.put("token", PropertiesInfo.getInstance().getApiToken());
-        var response = RestAssured.given().log().all().when().headers(headers).queryParams(queryParams).post(createBoard);
-//        LOGGER.info(response.getBody().asString());
-        var boardId = JsonPathHandler.getId(response.getBody().asString());
-        LOGGER.info("board id: " + boardId);
-        // Act
-
-        var getBoardEndpoint = String.format(String.format("%s/%s/boards/%s", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion(), boardId));
+        //Given
+        InputStream getBoardJsonSchema = getClass().getClassLoader()
+                .getResourceAsStream("schemas/getBoardSchema.json");
         queryParams.remove("name");
-        response = RestAssured.given().log().all().when().headers(headers).queryParams(queryParams).get(getBoardEndpoint);
-        // Assert
-        Assert.assertEquals(response.statusCode(), 200);
-        Assert.assertEquals(JsonPathHandler.getBoardName(response.getBody().asString()), boardName);
-        Assert.assertEquals(JsonPathHandler.getId(response.getBody().asString()), boardId);
+        request.setEndpoint(String.format("/boards/%s", boardID));
+
+        //When
+        var response = RequestManager.get(request);
+        response.then()
+                .spec(responseSpec)
+                .and()
+                .assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchema(getBoardJsonSchema))
+                .extract().response();
+        System.out.println(response.getBody().asPrettyString());
+
+        //Then
+        String name = JsonPath.getResult(response.getBody().asPrettyString(), "$.name");
+        Assert.assertEquals(name, "bruno test board 1-2 Updated");
     }
 
-    @Test
+    @Test(priority = 6)
     public void deleteBoardTest() {
-        // AAA
-        // Arrange
-        var createBoard = String.format("%s/%s/boards", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion());
-        var headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        var queryParams = new HashMap<String, String>();
-        String boardName = "AT-08-java1241dad23delewt1";
-        queryParams.put("name", boardName);
-        queryParams.put("key", PropertiesInfo.getInstance().getApiKey());
-        queryParams.put("token", PropertiesInfo.getInstance().getApiToken());
-        var response = RestAssured.given().log().all().when().headers(headers).queryParams(queryParams).post(createBoard);
-//        LOGGER.info(response.getBody().asString());
-        var boardId = JsonPathHandler.getId(response.getBody().asString());
-        LOGGER.info("board id: " + boardId);
-        // Act
+        request.setEndpoint(String.format("/boards/%s", boardID));
+        var response = RequestManager.delete(request)
+                .then()
+                .spec(responseSpec).extract().response();
+        System.out.println("Board Deleted");
+        System.out.println(response.getBody().asPrettyString());
 
-        var getBoardEndpoint = String.format(String.format("%s/%s/boards/%s", PropertiesInfo.getInstance().getBaseApi(),
-                PropertiesInfo.getInstance().getApiVersion(), boardId));
-        queryParams.remove("name");
-        response = RestAssured.given().log().all().when().headers(headers).queryParams(queryParams).delete(getBoardEndpoint);
-        LOGGER.info(response.getBody().asPrettyString());
-        // Assert
-        var expectedResponse = """
-                {\"_value\":null}
-                """;
-        Assert.assertEquals(response.statusCode(), 200);
-        Assert.assertEquals(response.body().asString(), expectedResponse);
-        Assert.assertTrue(response.body().asString().contains(expectedResponse));
+//        """
+//                {\"value\": null}
+//                """;
     }
 }
+ **/
