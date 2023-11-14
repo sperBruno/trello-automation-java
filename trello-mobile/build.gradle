@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(":trello-core")
+    // https://mvnrepository.com/artifact/io.appium/java-client
+    implementation group: 'io.appium', name: 'java-client', version: '9.0.0'
+
+}
+
+test {
+    useTestNG()
+}
