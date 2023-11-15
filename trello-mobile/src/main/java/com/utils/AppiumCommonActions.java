@@ -1,4 +1,4 @@
-package com.trello.utils;
+package com.utils;
 
 public class AppiumCommonActions {
 }

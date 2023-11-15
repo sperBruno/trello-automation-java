@@ -1,4 +1,4 @@
-package com.trello.appium;
+package com.appium;
 
 public class IOSDriver {
 }

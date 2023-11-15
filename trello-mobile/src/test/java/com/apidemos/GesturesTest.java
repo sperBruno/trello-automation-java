@@ -1,5 +1,6 @@
 package com.apidemos;
 
+import com.appium.DriverManager;
 import com.google.common.collect.ImmutableMap;
 import com.trello.utils.PathUtils;
 import io.appium.java_client.AppiumBy;
@@ -18,32 +19,13 @@ import java.time.Duration;
 
 public class GesturesTest {
 
-    private static final String apiDemosAPK = PathUtils.buildPath("trello-mobile/src/test/resources/apps/ApiDemos.apk");
     private static AndroidDriver driver;
-    private static String PORT = "4723";
-    private static String HOST = "127.0.0.1";
     private static WebDriverWait wait;
 
     @BeforeClass
     public void setUp() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("appium:automationName", "UIAutomator2");
-//        capabilities.setCapability("appium:deviceName", "pixel_xl");
-        capabilities.setCapability("appium:udid", "emulator-5554");
-
-        capabilities.setCapability("appium:app", apiDemosAPK);
-        capabilities.setCapability("appium:fullReset", "false");
-        capabilities.setCapability("appium:noReset", "true");
-        capabilities.setCapability("appium:forceAppLaunch", "true");
-        try {
-            driver = new AndroidDriver(new URL(String.format("http://%s:%s", HOST, PORT)),
-                    capabilities);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-            wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        } catch (MalformedURLException e) {
-//            throw new RuntimeException(e);
-        }
+       driver = DriverManager.getInstance().getDriver();
+       wait = DriverManager.getInstance().getWait();
     }
 
 
