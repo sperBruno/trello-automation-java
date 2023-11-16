@@ -140,4 +140,12 @@ public final class PropertiesInfo {
     public void setProperty(final String property, final String value) {
         this.properties.setProperty(property, value);
     }
+
+    public String getPlatformName() {
+        return getProperty("platformName");
+    }
+
+    public boolean getApiDemosFlag() {
+        return Boolean.valueOf(getProperty("apiDemos"));
+    }
 }
