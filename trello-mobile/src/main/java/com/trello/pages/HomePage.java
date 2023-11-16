@@ -1,17 +1,19 @@
 package com.trello.pages;
 
 import com.base.BasePage;
-import com.utils.AppiumCommonActions;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.WebElement;
 
 public class HomePage extends BasePage {
-    private String addButtonID = "com.trello:id/add_fab";
+    @AndroidFindBy(id = "com.trello:id/add_fab")
+    private WebElement addButton;
 
 
     public boolean isAddButtonDisplayed() {
-        return AppiumCommonActions.isElementDisplayed(AppiumCommonActions.findElementByID(addButtonID));
+        return this.addButton.isDisplayed();
     }
 
     public void clickAddButton() {
-        AppiumCommonActions.findElementByID(addButtonID).click();
+        this.addButton.click();
     }
 }

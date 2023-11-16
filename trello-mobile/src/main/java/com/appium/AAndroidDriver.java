@@ -37,7 +37,7 @@ public class AAndroidDriver implements IAppiumDriver {
         try {
             return new AndroidDriver(new URL(String.format("http://%s:%s", HOST, PORT)),
                     capabilities);
-        }catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             LOGGER.warn(e);
         }
         return null;

@@ -85,8 +85,7 @@ public class GesturesTest {
 
     @When("I wait test")
     public void waitsTest() throws InterruptedException {
-        WebElement appMenuItem = AppiumCommonActions.findElementByAccessibilityID("App");
-        appMenuItem.click();
+        homePage.clickAppOption();
         WebElement alarmElement = AppiumCommonActions.findElementByAccessibilityID("Alarm");
 
         Assert.assertTrue(alarmElement.isDisplayed(), "Alarm is not displayed");
@@ -105,5 +104,7 @@ public class GesturesTest {
                 AppiumCommonActions.findElementByAccessibilityID("Alarm Service"),
                 "Alarm Service"));
         System.out.println("Alarm Service is displayed: " + String.valueOf(isTextPresent));
+        DriverManager.getInstance().getDriver().navigate().back();
+        DriverManager.getInstance().getDriver().navigate().back();
     }
 }

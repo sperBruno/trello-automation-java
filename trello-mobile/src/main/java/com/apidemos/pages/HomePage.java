@@ -8,23 +8,21 @@ import org.openqa.selenium.WebElement;
 
 public class HomePage extends BasePage {
 
-//    @AndroidFindBy(accessibility = "App")
-//    private WebElement app;
-    private String appAccessibilityId = "App";
-    private String viewsAccessibilityId = "Views";
+    @AndroidFindBy(accessibility = "App")
+    private WebElement app;
+
+    @AndroidFindBy(accessibility = "Views")
+    private WebElement viewsOption;
 
     public boolean isAppDisplayed() {
-//        return this.app.isDisplayed();
-        return AppiumCommonActions.isElementDisplayed(
-                AppiumCommonActions.findElementByAccessibilityID(appAccessibilityId));
+        return this.app.isDisplayed();
     }
 
     public void clickAppOption() {
-//        app.click();
-        AppiumCommonActions.findElementByAccessibilityID(appAccessibilityId).click();
+        this.app.click();
     }
 
     public void clickViewsOption() {
-        AppiumCommonActions.findElementByAccessibilityID(viewsAccessibilityId).click();
+        this.viewsOption.click();
     }
 }

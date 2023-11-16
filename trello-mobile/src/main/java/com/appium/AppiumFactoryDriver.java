@@ -12,6 +12,7 @@ public class AppiumFactoryDriver {
         driverMap.put(Mobile.Android, AAndroidDriver::new);
         driverMap.put(Mobile.Android_BrowserStack, BrowserStackDriver::new);
     }
+
     public static IAppiumDriver getDriver(String platformName) {
 
         return driverMap.getOrDefault(Mobile.valueOf(platformName), AAndroidDriver::new).get();
