@@ -12,3 +12,5 @@ bin
 /trello-api/reports/
 /trello-api/allure-results/
 /trello-api/allure-report/
+/trello-mobile/allure-results/
+/trello-mobile/reports/
