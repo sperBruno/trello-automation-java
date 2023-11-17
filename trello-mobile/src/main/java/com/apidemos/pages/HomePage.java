@@ -1,8 +1,6 @@
 package com.apidemos.pages;
 
 import com.base.BasePage;
-import com.utils.AppiumCommonActions;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 

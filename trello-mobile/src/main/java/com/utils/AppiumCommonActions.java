@@ -3,8 +3,8 @@ package com.utils;
 import com.appium.DriverManager;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
 
 public class AppiumCommonActions {
 
@@ -24,5 +24,11 @@ public class AppiumCommonActions {
 
     public static WebElement findElementByID(String elementID) {
         return DriverManager.getInstance().getDriver().findElement(AppiumBy.id(elementID));
+    }
+
+
+    public static void runJSEScript(String script) {
+        JavascriptExecutor jse = (JavascriptExecutor) DriverManager.getInstance().getDriver();
+        jse.executeScript(script);
     }
 }

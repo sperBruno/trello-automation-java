@@ -148,4 +148,12 @@ public final class PropertiesInfo {
     public boolean getApiDemosFlag() {
         return Boolean.valueOf(getProperty("apiDemos"));
     }
+
+    public String getBrowserStackUserName() {
+        return getProperty("browserStackUserName");
+    }
+
+    public String getBrowserStackUserKey() {
+        return getProperty("browserStackUserKey");
+    }
 }
