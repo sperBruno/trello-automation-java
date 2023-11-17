@@ -26,3 +26,11 @@ Command to generate allure-report folder that contains html file of the report
 ```shell
 Allure generate
 ```
+
+
+Upload apk to browserstack
+
+```shell
+curl --location 'https://api-cloud.browserstack.com/app-automate/upload' \
+--header 'Authorization: Basic ' \
+--form 'file=@"/C:/Users/User/Documents/bruno/qacademy/repos/trello-automation/trello-mobile/src/test/resources/apps/ApiDemos.apk"'```
