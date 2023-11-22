@@ -9,4 +9,5 @@ rootProject.name = 'trello-automation'
 include 'trello-api'
 include 'trello-core'
 //findProject(':trello-api:trello-core')?.name = 'trello-core'
+include 'trello-mobile'
 
