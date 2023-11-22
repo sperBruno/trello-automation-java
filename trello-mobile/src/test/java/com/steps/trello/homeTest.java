@@ -5,6 +5,8 @@ import com.appium.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -43,5 +45,20 @@ public class homeTest {
     @Given("I can click on Add button")
     public void iCanClickAddButton() {
         homePage.clickAddButton();
+    }
+
+    @When("I click on add card option")
+    public void iClickOnAddCardOption() {
+         homePage.clickAddCardOptionButton();
+    }
+
+    @Then("I should see Home page")
+    public void iShouldSeeHomePage() {
+        Assert.assertTrue(homePage.isAddButtonDisplayed());
+    }
+
+    @When("I open {string} board")
+    public void iOpenTestBoard(String boardName) {
+        homePage.openBoard(boardName);
     }
 }

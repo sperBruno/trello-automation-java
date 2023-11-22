@@ -31,4 +31,8 @@ public class AppiumCommonActions {
         JavascriptExecutor jse = (JavascriptExecutor) DriverManager.getInstance().getDriver();
         jse.executeScript(script);
     }
+
+    public static WebElement findElementByXpath(String xpathLocator) {
+        return DriverManager.getInstance().getDriver().findElement(AppiumBy.xpath(xpathLocator));
+    }
 }
