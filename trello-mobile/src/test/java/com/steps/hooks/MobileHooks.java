@@ -1,4 +1,4 @@
-package com.hooks;
+package com.steps.hooks;
 
 import com.appium.DriverManager;
 import com.utils.AppiumCommonActions;
@@ -6,9 +6,6 @@ import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 
 public class MobileHooks {
 
@@ -17,13 +14,8 @@ public class MobileHooks {
 
     @After
     public void tearDown(Scenario scenario) {
+        LOGGER.info("After hook for scenario: " + scenario.getName());
         if (scenario.isFailed()) {
-// Take a screenshot...
-            final byte[] screenshot =
-                    ((TakesScreenshot) DriverManager.getInstance().getDriver()).getScreenshotAs(OutputType.BYTES);
-// embed it in the report.
-            scenario.attach(screenshot, "image/png", "screenshot-1");
-
             AppiumCommonActions.runJSEScript("browserstack_executor: {\"action\": \"setSessionStatus\",\"arguments\": {\"status\": \"failed\", \"reason\": \"TEST FAILED!\"}}");
             LOGGER.info(scenario.getName() + " has failed");
         } else {

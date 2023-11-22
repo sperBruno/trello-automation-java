@@ -1,6 +1,6 @@
 Feature: Trello Home Page
 
-
+  @trelloMo
   Scenario: User is able to create a card
     Given I am on trello Home Page
       And I can click on Add button
